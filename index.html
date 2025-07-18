@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Carta de Snoopy 💌</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #fff3e6, #ffd6d6);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      position: relative;
+      text-align: center;
+    }
+
+    .mensaje-inicial {
+      font-size: 1.5em;
+      color: #d35400;
+      margin-bottom: 15px;
+      animation: parpadeo 1.5s infinite;
+    }
+
+    @keyframes parpadeo {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .snoopy-img {
+      width: 250px;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+    }
+
+    .snoopy-img:hover {
+      transform: scale(1.05);
+    }
+
+    .carta-contenido {
+      display: none;
+      margin-top: 20px;
+      background: #fffbe6;
+      border: 2px solid #f1c40f;
+      border-radius: 15px;
+      padding: 20px;
+      max-width: 400px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      animation: fadeIn 1s ease-in-out;
+      z-index: 2;
+    }
+
+    .carta-contenido img {
+      width: 120px;
+      margin-bottom: 10px;
+    }
+
+    .mensaje {
+      font-size: 1em;
+      color: #333;
+      text-align: justify;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .corazon {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(-45deg);
+      animation: flotar 10s linear infinite;
+      z-index: 1;
+    }
+
+    .corazon::before,
+    .corazon::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .corazon::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .corazon::after {
+      left: 10px;
+      top: 0;
+    }
+
+    @keyframes flotar {
+      0% {
+        transform: translateY(0) rotate(-45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="mensaje-inicial">Toca a queso pera 😄💌</div>
+
+    <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Snoopy_Peanuts.png" 
+         alt="Snoopy con carta" class="snoopy-img" id="abrirCarta">
+
+    <div class="carta-contenido" id="contenidoCarta">
+      <img src="https://cdn.inspireuplift.com/uploads/images/seller_products/45609/1707063775_1801241048-snoopy-woodstock-heart-valentine-couple-svg-1801241048png.png" alt="Woodstock">
+      <div class="mensaje">
+        Hoy cumplimos 11 meses caminando juntos como novios, pero la verdad es que nuestras historias llevan mucho más tiempo entrelazadas. Desde pequeños, la vida ya nos estaba escribiendo en la misma página, como si supiera que un día tú y yo íbamos a mirarnos con otros ojos… con los de quien ama, cuida y elige cada día.<br><br>
+        Estos 11 meses han sido un regalo que no cambio por nada: con risas, abrazos largos, miradas cómplices y momentos que ya viven en mi corazón. Gracias por ser mi alegría constante, mi refugio y mi mejor amiga desde siempre.<br><br>
+        A veces pienso que el amor verdadero no se encuentra… se reconoce. Y yo te reconocí desde niño, como quien siempre supo dónde pertenecía.<br><br>
+        <strong>Feliz 11 meses, amor.</strong> Y que vengan mil meses más, porque contigo todo tiene sentido.<br><br>
+        Con todo mi amor,
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const abrir = document.getElementById('abrirCarta');
+    const contenido = document.getElementById('contenidoCarta');
+    const mensajeInicial = document.querySelector('.mensaje-inicial');
+    let corazonesActivos = false;
+
+    abrir.addEventListener('click', () => {
+      contenido.style.display = 'block';
+      mensajeInicial.style.display = 'none';
+
+      if (!corazonesActivos) {
+        setInterval(() => {
+          const corazon = document.createElement("div");
+          corazon.classList.add("corazon");
+          corazon.style.left = Math.random() * 100 + "vw";
+          corazon.style.animationDuration = Math.random() * 5 + 5 + "s";
+          document.body.appendChild(corazon);
+          setTimeout(() => corazon.remove(), 10000);
+        }, 300);
+        corazonesActivos = true;
+      }
+    });
+  </script>
+
+</body>
+</html>
